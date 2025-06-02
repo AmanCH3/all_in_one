@@ -1,27 +1,29 @@
-
 import '../model/student_model.dart';
 
 class StudentState {
-  final List<Student> lstStudent  ;
-  final bool isLoading ;
+  final List<Student> lstStudent;
 
-  const StudentState({
-    required this.lstStudent ,
-    required this.isLoading ,
+  final bool isLoading;
 
-  }) ;
+  const StudentState({required this.lstStudent, required this.isLoading});
 
-  factory StudentState.intial(){
-    return StudentState(lstStudent: [], isLoading: false) ;
+  // intially state is -> lstStudent where all the data is empty
+  // like name , address , age
+  // also loading is also false
+
+  factory StudentState.intial() {
+    return StudentState(lstStudent: [], isLoading: false);
   }
 
-// to change the state
+  // to change the state
   StudentState copyWith({
-    List<Student>? lstStudents ,
-    bool? isLoading ,
-  }){
-    return StudentState(lstStudent: lstStudents  ?? this.lstStudent, isLoading: isLoading ?? this.isLoading) ;
+    // -> copyWith -> change the state
+    List<Student>? lstStudents,
+    bool? isLoading,
+  }) {
+    return StudentState(
+      lstStudent: lstStudents ?? this.lstStudent,
+      isLoading: isLoading ?? this.isLoading,
+    );
   }
-
-
 }

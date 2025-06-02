@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../cubit/dashboard_cubit.dart';
 
 class DashboardView extends StatelessWidget {
@@ -8,10 +9,7 @@ class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dashboard"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Dashboard"), centerTitle: true),
       body: SafeArea(
         child: GridView(
           padding: const EdgeInsets.all(12),
@@ -83,6 +81,22 @@ class DashboardView extends StatelessWidget {
                     Icon(Icons.calculate, size: 48),
                     SizedBox(height: 8),
                     Text('Airthematic Bloc View'),
+                  ],
+                ),
+              ),
+            ),
+
+            Card(
+              child: InkWell(
+                onTap: () {
+                  context.read<DashboardCubit>().openAirthematicView(context);
+                },
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.calculate, size: 48),
+                    SizedBox(height: 8),
+                    Text('Student Bloc View'),
                   ],
                 ),
               ),
