@@ -73,7 +73,9 @@ class DashboardView extends StatelessWidget {
             Card(
               child: InkWell(
                 onTap: () {
-                  context.read<DashboardCubit>().openAirthematicView(context);
+                  context.read<DashboardCubit>().openArithematicBlocView(
+                    context,
+                  );
                 },
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +91,7 @@ class DashboardView extends StatelessWidget {
             Card(
               child: InkWell(
                 onTap: () {
-                  context.read<DashboardCubit>().openAirthematicView(context);
+                  context.read<DashboardCubit>().openStudentBlocView(context);
                 },
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,

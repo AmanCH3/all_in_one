@@ -24,7 +24,7 @@ class _StudentViewState extends State<StudentBlocView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Center(child: Text("Student Cubit"))),
+      appBar: AppBar(title: const Center(child: Text("Student Bloc"))),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(22.0),
@@ -32,89 +32,91 @@ class _StudentViewState extends State<StudentBlocView> {
             children: [
               Form(
                 key: _formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(
-                        labelText: "Name",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: nameController,
+                        decoration: InputDecoration(
+                          labelText: "Name",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        validator:
+                            (value) =>
+                                value == null || value.isEmpty
+                                    ? 'Enter name'
+                                    : null,
                       ),
-                      validator:
-                          (value) =>
-                              value == null || value.isEmpty
-                                  ? 'Enter name'
-                                  : null,
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      controller: ageController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: "Age",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: ageController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: "Age",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter age';
+                          }
+                          final age = int.tryParse(value);
+                          if (age == null || age <= 0) {
+                            return 'Enter a valid age';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Enter age';
-                        }
-                        final age = int.tryParse(value);
-                        if (age == null || age <= 0) {
-                          return 'Enter a valid age';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      controller: addressController,
-                      decoration: InputDecoration(
-                        labelText: "Address",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: addressController,
+                        decoration: InputDecoration(
+                          labelText: "Address",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        validator:
+                            (value) =>
+                                value == null || value.isEmpty
+                                    ? 'Enter address'
+                                    : null,
                       ),
-                      validator:
-                          (value) =>
-                              value == null || value.isEmpty
-                                  ? 'Enter address'
-                                  : null,
-                    ),
-                    const SizedBox(height: 40),
-                    BlocBuilder<StudentCubit, StudentState>(
-                      builder: (context, state) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Student student = Student(
-                                name: nameController.text,
-                                age: int.parse(ageController.text),
-                                address: addressController.text,
-                              );
-                              context.read<StudentBloc>().add(
-                                addStudent(student),
-                              );
+                      const SizedBox(height: 40),
+                      BlocBuilder<StudentBloc, StudentState>(
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Student student = Student(
+                                  name: nameController.text,
+                                  age: int.parse(ageController.text),
+                                  address: addressController.text,
+                                );
+                                context.read<StudentBloc>().add(
+                                  addStudent(student),
+                                );
 
-                              nameController.clear();
-                              ageController.clear();
-                              addressController.clear();
-                            }
-                          },
-                          child: const Text("Submit"),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+                                nameController.clear();
+                                ageController.clear();
+                                addressController.clear();
+                              }
+                            },
+                            child: const Text("Submit"),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
-                child: BlocBuilder<StudentCubit, StudentState>(
+                child: BlocBuilder<StudentBloc, StudentState>(
                   builder: (context, state) {
                     if (state.isLoading) {
                       return const Center(child: CircularProgressIndicator());
