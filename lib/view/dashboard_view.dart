@@ -71,6 +71,22 @@ class DashboardView extends StatelessWidget {
                 ),
               ),
             ),
+
+            Card(
+              child: InkWell(
+                onTap: () {
+                  context.read<DashboardCubit>().openAirthematicView(context);
+                },
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.calculate, size: 48),
+                    SizedBox(height: 8),
+                    Text('Airthematic Bloc View'),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

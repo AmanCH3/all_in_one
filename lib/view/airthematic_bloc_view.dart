@@ -1,3 +1,5 @@
+import 'package:all_in_one/bloc/arithematic_bloc.dart';
+import 'package:all_in_one/bloc/arithematic_event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +8,8 @@ import '../cubit/airthematic_cubit.dart';
 
 
 
-class AirthematicView extends StatelessWidget {
-  const AirthematicView({super.key});
+class AirthematicBlocView extends StatelessWidget {
+  const AirthematicBlocView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +49,45 @@ class AirthematicView extends StatelessWidget {
               ) ;
             }) ,
             ElevatedButton(onPressed: (){
-              context.read<AirthematicCubit>().add(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              // context.read<AirthematicCubit>().add(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              final first = int.parse(firstContoller.text) ;
+              final second = int.parse(secondController.text) ;
+              context
+              .read<ArithematicBloc>()
+              .add(AddEvent(first, second)) ;
 
 
             }, child: Text("Add")) ,
 
 
             ElevatedButton(onPressed: (){
-              context.read<AirthematicCubit>().div(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              // context.read<AirthematicCubit>().div(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              final first = int.parse(firstContoller.text) ;
+              final second = int.parse(secondController.text) ;
+              context
+              .read<ArithematicBloc>()
+              .add(SubEvent(first, second)) ;
 
             }, child: Text("Divison")) ,
 
             ElevatedButton(onPressed: (){
-              context.read<AirthematicCubit>().mul(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              // context.read<AirthematicCubit>().mul(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              final first = int.parse(firstContoller.text) ;
+              final second = int.parse(secondController.text) ;
+              context
+              .read<ArithematicBloc>()
+              .add(MultiplyEvent(first, second)) ;
 
             }, child: Text("Multiply")) ,
 
             ElevatedButton(onPressed: (){
-              context.read<AirthematicCubit>().sub(int.parse(firstContoller.text), int.parse(secondController.text)) ;
+              // context.read<AirthematicCubit>().sub(int.parse(firstContoller.text), int.parse(secondController.text)) ;
 
+              final first = int.parse(firstContoller.text) ;
+              final second = int.parse(secondController.text) ;
+              context
+                  .read<ArithematicBloc>()
+                  .add(SubEvent(first, second)) ;
 
             }, child: Text("Subtact"))
 

@@ -1,3 +1,4 @@
+import 'package:all_in_one/view/airthematic_bloc_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +10,8 @@ import '../view/counter_view.dart';
 import '../view/student_view.dart';
 
 class DashboardCubit extends Cubit<void> {
-  DashboardCubit(
-      this._counterCubit,
-      this._airthematicCubit,
-      this._studentCubit,
-      ) : super(null);
+  DashboardCubit(this._counterCubit, this._airthematicCubit, this._studentCubit)
+    : super(null);
 
   final CounterCubit _counterCubit;
   final AirthematicCubit _airthematicCubit;
@@ -23,10 +21,11 @@ class DashboardCubit extends Cubit<void> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: _counterCubit,
-          child: const CounterCubitView(),
-        ),
+        builder:
+            (_) => BlocProvider.value(
+              value: _counterCubit,
+              child: const CounterCubitView(),
+            ),
       ),
     );
   }
@@ -35,10 +34,11 @@ class DashboardCubit extends Cubit<void> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: _airthematicCubit,
-          child: const AirthematicView(),
-        ),
+        builder:
+            (_) => BlocProvider.value(
+              value: _airthematicCubit,
+              child: const AirthematicView(),
+            ),
       ),
     );
   }
@@ -47,10 +47,24 @@ class DashboardCubit extends Cubit<void> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: _studentCubit,
-          child: const StudentView(),
-        ),
+        builder:
+            (_) => BlocProvider.value(
+              value: _studentCubit,
+              child: const StudentView(),
+            ),
+      ),
+    );
+  }
+
+  void openArithematicBlocView(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => BlocProvider.value(
+              value: _airthematicCubit,
+              child: const AirthematicBlocView(),
+            ),
       ),
     );
   }
